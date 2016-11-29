@@ -27,21 +27,15 @@ public class QueueImpl implements Queue {
       growQueue();
     }
     queueArray[rear] = o;
-    if (rear == queueArray.length-1)
-      rear = 0;
-    else
-      rear++;
+    rear = (rear + 1) % queueArray.length;
     return true;
   }
 
   @Override
   public Object dequeue() {
     Object copy = queueArray[front];
-    queueArray[front]=null;
-    if(front==queueArray.length-1)
-      front = 0;
-    else
-      front++;
+    queueArray[front] = null;
+    front = (front + 1) % queueArray.length;
     return copy;
   }
 
@@ -57,7 +51,7 @@ public class QueueImpl implements Queue {
 
   @Override
   public boolean isEmpty() {
-    if(front==rear){
+    if (front == rear) {
       return true;
     }
     return false;
@@ -84,16 +78,16 @@ public class QueueImpl implements Queue {
   @Override
   public void print() {
     if (rear > front) {
-      for (int i = front,j=0; i < rear; i++,j++) {
-        System.out.println("position: "+j+", member: "+queueArray[i]);
+      for (int i = front, j = 0; i < rear; i++, j++) {
+        System.out.println("position: " + j + ", member: " + queueArray[i]);
       }
     } else {
       int j = 0;
       for (int i = front; i < queueArray.length; i++, j++) {
-        System.out.println("position: "+j+", member: "+queueArray[i]);
+        System.out.println("position: " + j + ", member: " + queueArray[i]);
       }
       for (int i = 0; i < rear; i++, j++) {
-        System.out.println("position: "+j+", member: "+queueArray[i]);
+        System.out.println("position: " + j + ", member: " + queueArray[i]);
       }
     }
   }
