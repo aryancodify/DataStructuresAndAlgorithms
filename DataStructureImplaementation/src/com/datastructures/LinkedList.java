@@ -15,5 +15,5 @@ public interface LinkedList {
   int getSize();
 
   void printList() throws Exception;
-
+  
 }

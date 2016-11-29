@@ -37,7 +37,7 @@ public class LinkedListImpl implements LinkedList {
 
   @Override
   public Object deleteLast() throws Exception {
-    Element previous = returnPreviousToIndex(this.count-1, this.first);
+    Element previous = returnPreviousToIndex(this.count - 1, this.first);
     Element last = previous.getNext();
     Element lastCopy;
     if (last == null) {
@@ -70,10 +70,17 @@ public class LinkedListImpl implements LinkedList {
       throw new Exception();
     }
     Element previousElement = returnPreviousToIndex(index, this.first);
-    Element toBeDeleted = previousElement.getNext();
-    Element deletedCopy = new Element(toBeDeleted.getData(), toBeDeleted.getNext());
-    previousElement.setNext(toBeDeleted.getNext());
-    toBeDeleted = null;
+    Element deletedCopy = null;
+    if (previousElement == null) {
+      deletedCopy = this.first;
+      this.first = this.first.getNext();
+    } else {
+      Element toBeDeleted = previousElement.getNext();
+      deletedCopy = new Element(toBeDeleted.getData(), toBeDeleted.getNext());
+      previousElement.setNext(toBeDeleted.getNext());
+      toBeDeleted = null;
+    }
+    this.count--;
     return deletedCopy.getData();
   }
 
@@ -107,6 +114,8 @@ public class LinkedListImpl implements LinkedList {
   }
 
   private static Element returnPreviousToIndex(int index, Element first) {
+    if (index == 0)
+      return null;
     int start = 1;
     Element previousElement = first;
     while (start++ < index) {

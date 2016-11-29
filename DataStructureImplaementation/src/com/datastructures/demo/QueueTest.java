@@ -2,11 +2,13 @@ package com.datastructures.demo;
 
 import com.datastructures.Queue;
 import com.datastructures.impl.QueueImpl;
+import com.datastructures.impl.QueueLinkedListImpl;
 
 public class QueueTest {
 
-  public static void main(String[] args) {
-    Queue myQueue = new QueueImpl();
+  public static void main(String[] args) throws Exception {
+    //Queue myQueue = new QueueImpl();
+    Queue myQueue = new QueueLinkedListImpl();
     myQueue.enqueue("1");
     myQueue.enqueue("2");
     myQueue.enqueue("3");
